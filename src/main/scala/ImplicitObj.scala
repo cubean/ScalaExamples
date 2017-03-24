@@ -12,6 +12,7 @@ object ImplicitObj {
   val ys = List("hello", "world", "bye")
 
   def getResult: Traversable[(Int, String)] = {
+    println(this.getClass.getName)
     xs cross ys
   }
 }
