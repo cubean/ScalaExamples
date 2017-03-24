@@ -1,0 +1,48 @@
+# MAC Environment for Scala Development## Homebrew```sh$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```## Java 8```sh
+$ brew update
+$ brew cask install java
+```After installation:/usr/bin/java/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java```sh
+$ java -version
+java version "1.8.0_121"
+Java(TM) SE Runtime Environment (build 1.8.0_121-b13)
+Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)
+```
+
+Set environment
+
+Edit .bashrc file
+
+```sh
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home
+export PATH=$JAVA_HOME/bin:$PATH
+```
+## ScalaScala 2.11.8 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_121)```sh$ brew install scala
+```## SBT
+
+```sh$ brew install sbt```
+Operations in project:
+
+```sh$ sbt compile$ sbt test
+$ sbt testOnly partFileName*$ sbt run```## git```sh$ brew install git
+```## How to delete all ".DS_Store"
+
+```sh$ find . -name ".DS_Store" -exec git rm {} \;```## Intellij
+https://www.jetbrains.com/idea/
+## Scala-Eclipsehttp://scala-ide.org/download/sdk.html### Debug project in Eclipse:To debug, start your application with activator -jvm-debug 9999 run and in Eclipse right-click on the project and select Debug As, Debug Configurations. In theDebug Configurations dialog, right-click on Remote Java Application and selectNew. Change Port to 9999 and click Apply. From now on you can click on Debug to connect to the running application. ## Mysql1.	mysql-5.7.15-osx10.11-x86_64.dmghttp://dev.mysql.com/doc/refman/5.7/en/osx-installation-pkg.html add /usr/local/mysql/bin to your PATH environment variable2.	mysql-workbench-community-6.3.7-osx-x86_64.dmg## Spark 2.0.1assume Java, Scala and Homebrew are installed as suggested above
+
+```sh$ brew install wget$ wget http://d3kbcqa49mib13.cloudfront.net/spark-2.0.1-bin-hadoop2.7.tgz$ tar -xvzf spark-2.0.1-bin-hadoop2.7.tgz$ mv  spark-2.0.1-bin-hadoop2.7 /usr/local/spark$ rm spark-2.0.1-bin-hadoop2.7.tgz
+```### test
+
+```sh$ cd /usr/local/spark$ ./bin/spark-shell # spark shell
+```
+quit spark shell by :quit
+
+```sh$ ./bin/run-example org.apache.spark.examples.SparkPi
+```Edit host name in /etc/hosts if the following error is encountered (source)
+
+```host name can be identified by typing hostname in terminal
+```
+
+```$ sudo nano /etc/hosts
+```edit [127.0.0.1      localhost] into [#127.0.0.1      Macbook-Pro]
