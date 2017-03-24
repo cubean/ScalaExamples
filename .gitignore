@@ -1,0 +1,42 @@
+*.class
+*.log
+*.DS_Store
+*.iml
+
+# sbt specific
+.cache
+.cache-main
+.cache-tests
+.history
+.lib/
+dist/*
+
+# Ignore Eclipse files
+.project
+.classpath
+.prefs
+.settings
+
+# Scala-IDE specific
+.scala_dependencies
+.worksheet
+
+bin/
+project/project/
+project/target/
+target/
+logs/
+
+# VIM swap files
+*.swp
+
+# build files
+debian/
+*.deb
+*.rpm
+
+#IntelliJ files
+.idea/
+dist/
+tmp/
+
