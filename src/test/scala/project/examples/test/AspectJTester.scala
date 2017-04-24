@@ -5,7 +5,6 @@ package project.examples.test
   */
 
 import org.scalatest.FunSuite
-import project.examples.MainApp.Sum
 
 class AspectJTester extends FunSuite {
 
@@ -13,10 +12,11 @@ class AspectJTester extends FunSuite {
 
     println("//////////// AspectJTester start:")
 
+    import project.examples.AspectJExample
 
-    val sum = new Sum
+    val ase = new AspectJExample
 
-    assert(sum.checkSum(2, 3) == 5)
+    assert(ase.checkSum(2, 3) == 5)
 
 
     println("//////////// AspectJTester end.")
