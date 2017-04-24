@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <Properties>
+        <Property name="LOG_DIR">/tmp/logs/scala-examples</Property>
+        <Property name="ARCHIVE">${LOG_DIR}/archive</Property>
+        <Property name="PATTERN">%-5level %d [%t] %c.%M(%L): %m%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="${PATTERN}" />
+        </Console>
+        <RollingFile name="fileWriter"
+                     fileName="${LOG_DIR}/scala-examples.log"
+                     filePattern="${ARCHIVE}/scala-examples.log.%d{yyyy-MM-dd-hh-mm}.gz">
+            <PatternLayout pattern="${PATTERN}"/>
+            <TimeBasedTriggeringPolicy/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="ERROR">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+        <Logger name="project.examples" level="TRACE" additivity="false">
+            <AppenderRef ref="STDOUT"/>
+            <AppenderRef ref="fileWriter"/>
+        </Logger>
+        <Logger name="org" level="ERROR" additivity="false">
+            <AppenderRef ref="STDOUT"/>
+        </Logger>
+
+    </Loggers>
+</configuration>
