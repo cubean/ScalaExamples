@@ -15,9 +15,6 @@ resourceDirectory in Test := baseDirectory.value / "src" / "test" / "resources"
 
 enablePlugins(JavaAppPackaging)
 
-javaOptions ++= Seq("-javaagent:" + System.getProperty("user.home") + "/.ivy2/cache/org.aspectj/aspectjweaver/jars/aspectjweaver-1.8.10.jar")
-fork := true
-
 libraryDependencies ++= Seq(
   "org.scalatest" % "scalatest_2.12" % "3.0.1",
   "org.scala-lang" % "scala-library" % "2.12.1",
