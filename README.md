@@ -1,4 +1,4 @@
-#ScalaExamples
+# ScalaExamples
 
 Some useful Scala examples
 
