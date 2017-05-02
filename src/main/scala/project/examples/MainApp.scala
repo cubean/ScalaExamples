@@ -10,7 +10,6 @@ object MainApp {
     println("////////////////LazyValObj////////////////")
     println(s"\n >>>>>LazyValObj Result: ${LazyValObj.getResult}")
 
-    println("////////////////ImplicitObj////////////////")
-    println(s"\n >>>>>ImplicitObj Result: ${ImplicitObj.getResult}")
+    ImplicitObj.runAll
   }
 }
