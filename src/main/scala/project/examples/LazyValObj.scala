@@ -3,7 +3,7 @@ package project.examples
 /**
   * Created by cubean liu on 24/3/17.
   */
-object LazyValObj {
+object LazyValObj extends ExampleBase{
   def expr: Int = {
     val x = {
       print("x")
@@ -24,4 +24,8 @@ object LazyValObj {
   }
 
   def getResult: Int = expr
+
+  override def runAll(): Unit = {
+    println(s"\n >>>>>LazyValObj Result: ${LazyValObj.getResult}")
+  }
 }

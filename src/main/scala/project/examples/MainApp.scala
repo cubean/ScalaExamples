@@ -7,9 +7,16 @@ object MainApp {
   def main(args: Array[String]): Unit = {
     println("Welcome to cubean's Scala examples!")
 
-    println("////////////////LazyValObj////////////////")
-    println(s"\n >>>>>LazyValObj Result: ${LazyValObj.getResult}")
+    ExampleLib add LazyValObj
+    ExampleLib add ImplicitObj
+    ExampleLib add ShellCmd
 
-    ImplicitObj.runAll
+    ExampleLib.allExamples.foreach(c => {
+      println(s"\n**${c.getClass.getName}" + "*" * 60)
+      c.runAll()
+    }
+    )
+
+    println("Scala examples show finished")
   }
 }
