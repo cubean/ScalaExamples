@@ -22,4 +22,5 @@ Some useful Scala examples
         "key1": "value1",
         "key2": 4
       }
+      
       Map(key1 -> value1, key2 -> 4)
