@@ -21,7 +21,9 @@ libraryDependencies ++= Seq(
   "org.apache.logging.log4j" % "log4j-core" % "2.8.1",
   "org.apache.logging.log4j" % "log4j-api" % "2.8.1",
 
-  "org.aspectj" % "aspectjtools" % "1.8.10"
+  "org.aspectj" % "aspectjtools" % "1.8.10",
+
+  "io.spray" % "spray-json_2.12" % "1.3.3"
 )
 
 import com.typesafe.sbt.SbtAspectj._

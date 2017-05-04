@@ -15,3 +15,11 @@ Some useful Scala examples
     - Method (timeSpan 0:0:0:7): execution(AspectJExample.checkSum(..))
     - Input  (2017-04-24T15:45:26.679): 2 | 3
     - Output (2017-04-24T15:45:26.686): 5
+    
+- 2017-05-04 SprayJson
+  - Output:
+    - {
+        "key1": "value1",
+        "key2": 4
+      }
+      Map(key1 -> value1, key2 -> 4)

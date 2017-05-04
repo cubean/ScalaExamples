@@ -10,6 +10,7 @@ object MainApp {
     ExampleLib add LazyValObj
     ExampleLib add ImplicitObj
     ExampleLib add ShellCmd
+    ExampleLib add SprayJson
 
     ExampleLib.allExamples.foreach(c => {
       println(s"\n**${c.getClass.getName}" + "*" * 60)
