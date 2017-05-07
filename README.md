@@ -24,3 +24,6 @@ Some useful Scala examples
       }
       
       Map(key1 -> value1, key2 -> 4)
+
+- 2017-05-07 RecursiveCoin
+  - Run test
