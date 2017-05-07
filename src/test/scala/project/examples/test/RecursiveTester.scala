@@ -5,7 +5,7 @@ package project.examples.test
   */
 
 import org.scalatest.FunSuite
-import project.examples.RecursiveCoin
+import project.examples.{ParallelCountChange, RecursiveCoin}
 
 class RecursiveTester extends FunSuite {
 
@@ -59,6 +59,16 @@ class RecursiveTester extends FunSuite {
         s"countChange($money, $coins) should be $expected")
 
     check(50, List(1, 2, 5, 10), 341)
-//    check(250, List(1, 2, 5, 10, 20, 50), 177863)
+    check(250, List(1, 2, 5, 10, 20, 50), 177863)
+  }
+
+  test("ParallelCountChange should work for multi-coins") {
+    def check(money: Int, coins: List[Int], expected: Int) =
+      assert(ParallelCountChange.parCountChange(money, coins,
+        ParallelCountChange.combinedThreshold(money, coins)) == expected,
+        s"countChange($money, $coins) should be $expected")
+
+    check(50, List(1, 2, 5, 10), 341)
+    check(250, List(1, 2, 5, 10, 20, 50), 177863)
   }
 }
