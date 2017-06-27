@@ -12,7 +12,8 @@ object MainApp {
     //    ExampleLib add ShellCmd
     //    ExampleLib add SprayJson
     //    ExampleLib add RecursiveCoin
-    ExampleLib add ConcurrentMap
+    //    ExampleLib add ConcurrentMap
+    ExampleLib add FutureObj
 
     ExampleLib.allExamples.foreach(c => {
       println(s"\n**${c.getClass.getName}" + "*" * 60)

@@ -63,6 +63,56 @@ val timeSpan = System.currentTimeMillis() - start
 println(timeSpan)
 ```
 
+## Thread Safety Problem
+
+### synchronization
+Mutexes provide ownership semantics. When you enter a mutex, you own it. The most common way of using a mutex in the JVM is by synchronizing on something. In this case, we’ll synchronize on our Person.
+
+In the JVM, you can synchronize on any instance that’s not null.
+
+```scala
+class Person(var name: String) {
+  def set(changedName: String) {
+    this.synchronized {
+      name = changedName
+    }
+  }
+}
+```
+
+### volatile
+With Java 5’s change to the memory model, volatile and synchronized are basically identical except with volatile, nulls are allowed.
+
+synchronized allows for more fine-grained locking. volatile synchronizes on every access.
+
+```scala
+class Person(@volatile var name: String) {
+  def set(changedName: String) {
+    name = changedName
+  }
+}
+```
+
+### AtomicReference
+Also in Java 5, a whole raft of low-level concurrency primitives were added. One of them is an AtomicReference class
+
+```scala
+import java.util.concurrent.atomic.AtomicReference
+
+class Person(val name: AtomicReference[String]) {
+  def set(changedName: String) {
+    name.set(changedName)
+  }
+}
+```
+
+### Does this cost anything?
+@AtomicReference is the most costly of these two choices since you have to go through method dispatch to access values.
+
+volatile and synchronized are built on top of Java’s built-in monitors. Monitors cost very little if there’s no contention. Since synchronized allows you more fine-grained control over when you synchronize, there will be less contention so synchronized tends to be the cheapest option.
+
+When you enter synchronized points, access volatile references, or deference AtomicReferences, Java forces the processor to flush their cache lines and provide a consistent view of data.
+
 ## scala.collection.concurrent.Map
 
 The scala.collection.concurrent.Map trait is not meant to be mixed-in with an existing mutable Scala Map to obtain a thread-safe version of the map instance. The SynchronizedMap mixin existed for this purpose before 2.11, but is now deprecated.
