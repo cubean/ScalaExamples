@@ -5,11 +5,12 @@ package project.examples
   */
 object ConcurrentMap extends ExampleBase {
 
-  val his = new java.util.concurrent.ConcurrentHashMap[Int, Int]()
+  // refer to the document of ScalaExamples.md : scala.collection.concurrent.Map
+  val his = new scala.collection.concurrent.TrieMap[Int, Int]()
 
   private def fib(i: Int): Int = {
-    if (his.containsKey(i)) {
-      his.get(i)
+    if (his.contains(i)) {
+      his(i)
     }
     else {
       //println(">>>>" + i)

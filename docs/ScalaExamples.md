@@ -62,3 +62,59 @@ val timeSpan = System.currentTimeMillis() - start
 
 println(timeSpan)
 ```
+
+## scala.collection.concurrent.Map
+
+The scala.collection.concurrent.Map trait is not meant to be mixed-in with an existing mutable Scala Map to obtain a thread-safe version of the map instance. The SynchronizedMap mixin existed for this purpose before 2.11, but is now deprecated.
+
+Currently, Scala has the scala.collection.concurrent.TrieMap implementation for the scala.collection.concurrent.Map interface, but can wrap Java classes as well.
+
+The scala.collection.concurrent.Map, in versions prior to 2.10 known as scala.collection.mutable.ConcurrentMap, interface is used when you:
+
+want to implement your own concurrent, thread-safe Map from scratch
+want to wrap an existing Java concurrent map implementation:
+E.g:
+
+```scala
+import scala.collection._
+import scala.collection.convert.decorateAsScala._
+import java.util.concurrent.ConcurrentHashMap
+
+val map: concurrent.Map[String, String] = new ConcurrentHashMap().asScala
+
+```
+want to write generic code that works concurrent maps, and don't want to commit to a specific implementation:
+E.g.:
+
+```scala
+import scala.collection._
+
+def foo(map: concurrent.Map[String, String]) = map.putIfAbsent("", "")
+
+foo(new concurrent.TrieMap)
+foo(new java.util.concurrent.ConcurrentSkipListMap().asScala)
+```
+you could implement your own wrapper around a single-threaded mutable map implementation by using synchronized (but you would need to ensure that your program is accessing the mutable map only through this wrapper and never directly).
+E.g.:
+
+```scala
+class MySynchronizedMap[K, V](private val underlying: mutable.Map[K, V])
+extends concurrent.Map[K, V] {
+  private val monitor = new AnyRef
+  def putIfAbsent(k: K,v: V): Option[String] = monitor.synchronized {
+    underlying.get(k) match {
+      case s: Some[V] => s
+      case None =>
+        underlying(k) = v
+        None
+    }
+  }
+  def remove(k: K, v: V): Boolean = monitor.synchronized {
+    underlying.get(k) match {
+      case Some(v0) if v == v0 => underlying.remove(k); true
+      case None => false
+    }
+  }
+  // etc.
+}
+```
