@@ -13,7 +13,7 @@ resourceDirectory in Compile := baseDirectory.value / "src" / "main" / "resource
 
 resourceDirectory in Test := baseDirectory.value / "src" / "test" / "resources"
 
-enablePlugins(JavaAppPackaging)
+//enablePlugins(JavaAppPackaging)
 
 libraryDependencies ++= Seq(
   "org.scalatest" % "scalatest_2.12" % "3.0.1",
