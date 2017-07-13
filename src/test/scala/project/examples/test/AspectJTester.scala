@@ -10,6 +10,7 @@ class AspectJTester extends FunSuite {
 
   test("AspectJTester -  should get back the expected result.") {
 
+    println("""Please run this test in "sbt test", which doesn't work in IntelliJ test. """)
     println("//////////// AspectJTester start:")
 
     import project.examples.AspectJExample
