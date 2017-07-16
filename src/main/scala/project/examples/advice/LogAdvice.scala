@@ -1,6 +1,7 @@
 package project.examples.advice
 
-import org.apache.logging.log4j.LogManager
+//import org.apache.logging.log4j.LogManager
+import com.typesafe.scalalogging.Logger
 import org.aspectj.lang.annotation._
 import org.aspectj.lang.{JoinPoint, ProceedingJoinPoint}
 import project.examples.util.ProjectDateTime
@@ -39,5 +40,7 @@ class LogAdvice {
     throw ex
   }
 
-  private def getLogger(joinPoint: JoinPoint) = LogManager.getLogger(joinPoint.getTarget.getClass.getName)
+  private def getLogger(joinPoint: JoinPoint) =
+    Logger(joinPoint.getTarget.getClass)
+//    LogManager.getLogger(joinPoint.getTarget.getClass.getName)
 }
