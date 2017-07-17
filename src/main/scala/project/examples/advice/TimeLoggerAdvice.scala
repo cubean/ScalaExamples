@@ -1,6 +1,7 @@
 package project.examples.advice
 
-//import org.apache.logging.log4j.LogManager
+import java.time.LocalDateTime
+
 import com.typesafe.scalalogging.Logger
 import org.aspectj.lang.annotation._
 import org.aspectj.lang.{JoinPoint, ProceedingJoinPoint}

@@ -15,6 +15,7 @@ class AspectJTester extends FunSuite {
 
     import project.examples.AspectJExample
 
+    println("!!!!!! Pay more attention: The aspectj class cannot be under test folder!")
     val ase = new AspectJExample
 
     assert(ase.checkSum(2, 3) == 5)
