@@ -2,7 +2,7 @@ name := "ScalaExamples"
 
 version := "1.0"
 
-scalaVersion := "2.12.1"
+scalaVersion := "2.11.11"
 
 
 scalaSource in Compile := baseDirectory.value / "src" / "main" / "scala"
@@ -14,7 +14,8 @@ resourceDirectory in Compile := baseDirectory.value / "src" / "main" / "resource
 resourceDirectory in Test := baseDirectory.value / "src" / "test" / "resources"
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "3.0.3" % "test",
+  "com.typesafe.slick" % "slick_2.11" % "3.2.0",
+  "mysql" % "mysql-connector-java" % "5.1.34",
 
 //  "org.scala-lang" % "scala-library" % "2.12.1",
 
@@ -26,9 +27,9 @@ libraryDependencies ++= Seq(
 //  "org.apache.logging.log4j" % "log4j-core" % "2.8.1",
 //  "org.apache.logging.log4j" % "log4j-api" % "2.8.1",
 
-//  "org.aspectj" % "aspectjtools" % "1.8.10",
+  "io.spray" % "spray-json_2.12" % "1.3.3",
 
-  "io.spray" % "spray-json_2.12" % "1.3.3"
+  "org.scalatest" %% "scalatest" % "3.0.3" % "test"
 )
 
 import com.typesafe.sbt.SbtAspectj._

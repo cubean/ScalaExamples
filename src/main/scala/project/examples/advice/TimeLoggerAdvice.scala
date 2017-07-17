@@ -10,13 +10,13 @@ import project.examples.util.ProjectDateTime
   * Created by Cubean Liu on 20/4/17.
   */
 @Aspect
-class LogAdvice {
+class TimeLoggerAdvice {
 
   /**
     * around execution of Log
     */
-  @Around("@annotation(log) && execution(* *.*(..))")
-  def aroundLog(joinPoint: ProceedingJoinPoint, log: Log): Object = {
+  @Around("@annotation(timeLog) && execution(* *.*(..))")
+  def aroundLog(joinPoint: ProceedingJoinPoint, timeLog: TimeLogger): Object = {
 
     val lg = getLogger(joinPoint)
 
@@ -26,16 +26,16 @@ class LogAdvice {
     val timeSpan = ProjectDateTime.timeSpan(startTime, endTime)
 
     lg.trace(s"--Method (timeSpan $timeSpan): ${joinPoint.toShortString}")
-    if (log.logBefore)
+    if (timeLog.logBefore)
       lg.trace(s"--Input  ($startTime): ${joinPoint.getArgs.mkString(" | ")}")
-    if (log.logAfter) lg.trace(s"--Output ($endTime): $result")
+    if (timeLog.logAfter) lg.trace(s"--Output ($endTime): $result")
 
     result
   }
 
-  @AfterThrowing(value = "@annotation(log)", throwing = "ex")
+  @AfterThrowing(value = "@annotation(timeLog)", throwing = "ex")
   @throws[Throwable]
-  def logAfterThrowingException(joinPoint: JoinPoint, log: Log, ex: Exception): Unit = {
+  def logAfterThrowingException(joinPoint: JoinPoint, timeLog: TimeLogger, ex: Exception): Unit = {
     getLogger(joinPoint).error(s"-----error occurred when invoking ${joinPoint.toShortString}", ex)
     throw ex
   }
