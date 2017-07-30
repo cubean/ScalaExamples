@@ -1,38 +1,11 @@
 package project.examples
 
+import scala.collection.parallel.ForkJoinTaskSupport
+
 /**
   * Created by Cubean Liu on 6/5/17.
   */
 object RecursiveCoin extends ExampleBase {
-
-  def countChange(money: Int, coins: List[Int]): Int = {
-    if (money == 0) 1
-    else {
-
-      def cal(money: Int, coins: List[Int], path: List[Int]): Int =
-        coins.map { x => {
-          val total = (path :+ x).sum
-
-          if (total < money) cal(money, coins.dropWhile(_ < x), path :+ x)
-          else if (total == money) {
-//            println((path :+ x).mkString("[", ", ", "]"))
-            1
-          }
-          else 0
-        }
-        }.sum
-
-      cal(money, coins.sorted, List[Int]())
-    }
-  }
-
-  override def runAll(): Unit = {
-    println(countChange(4, List(1, 2)))
-  }
-}
-
-
-object ParallelCountChange {
 
   /** Returns the number of ways change can be made from the specified list of
     * coins for the specified amount of money.
@@ -58,6 +31,14 @@ object ParallelCountChange {
     }
   }
 
+  override def runAll(): Unit = {
+    println(countChange(4, List(1, 2)))
+  }
+}
+
+
+object ParallelCountChange {
+
   type Threshold = (Int, List[Int]) => Boolean
 
   /** In parallel, counts the number of ways change can be made from the
@@ -80,8 +61,15 @@ object ParallelCountChange {
         }
         }.sum
 
-      def parCal(m: Int, c: List[Int], path: List[Int]): Int =
-        c.par.map { x => {
+      def parCal(m: Int, c: List[Int], path: List[Int]): Int = {
+
+        val cc = c.par
+        val cpuCores = Runtime.getRuntime.availableProcessors()
+        val forkNum = if (cpuCores > 2) cpuCores - 1 else 1
+
+        cc.tasksupport = new ForkJoinTaskSupport(new scala.concurrent.forkjoin.ForkJoinPool(forkNum))
+
+        cc.map { x => {
           val total = (path :+ x).sum
 
           if (total < m) cal(m, c.dropWhile(_ < x), path :+ x)
@@ -92,11 +80,13 @@ object ParallelCountChange {
           else 0
         }
         }.sum
+      }
 
       if (threshold(money, coins))
         cal(money, coins.sorted, List[Int]())
       else parCal(money, coins.sorted, List[Int]())
     }
+
   }
 
   /** Threshold heuristic based on the starting money. */

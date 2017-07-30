@@ -1,1 +1,34 @@
-# MAC Environment for Scala Development## Homebrew```sh$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"```## Java 8```sh$ brew update$ brew cask install java```After installation:/usr/bin/java/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java```sh$ java -versionjava version "1.8.0_121"Java(TM) SE Runtime Environment (build 1.8.0_121-b13)Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)```Set environmentEdit .bashrc file```shexport JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Homeexport PATH=$JAVA_HOME/bin:$PATH```## ScalaScala 2.11.8 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_121)```sh$ brew install scala```## SBT```sh$ brew install sbt```Operations in project:```sh$ sbt compile$ sbt test$ sbt testOnly partFileName*$ sbt run```## git```sh$ brew install git```## How to delete all ".DS_Store"```sh$ find . -name ".DS_Store" -exec git rm {} \;```## Intellijhttps://www.jetbrains.com/idea/## Scala-Eclipsehttp://scala-ide.org/download/sdk.html### Debug project in Eclipse:To debug, start your application with activator -jvm-debug 9999 run and in Eclipse right-click on the project and select Debug As, Debug Configurations. In theDebug Configurations dialog, right-click on Remote Java Application and selectNew. Change Port to 9999 and click Apply. From now on you can click on Debug to connect to the running application. ## Mysql1.	mysql-5.7.15-osx10.11-x86_64.dmghttp://dev.mysql.com/doc/refman/5.7/en/osx-installation-pkg.html add /usr/local/mysql/bin to your PATH environment variable2.	mysql-workbench-community-6.3.7-osx-x86_64.dmg
+# MAC Environment for Scala Development## Installation date and OS info
+
+```sh
+$ date
+
+Tue 25 Jul 2017 22:25:18 AEST
+
+$ sw_vers
+
+ProductName:	Mac OS X
+ProductVersion:	10.12.5
+BuildVersion:	16F73
+```
+## Homebrew```sh$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"```## Oracle Java 8```sh$ brew update$ brew cask install java
+
+Downloading http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-macosx-x64.dmg```- After installation:> /usr/bin/java> /System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java```sh$ java -version
+java version "1.8.0_141"
+Java(TM) SE Runtime Environment (build 1.8.0_141-b15)
+Java HotSpot(TM) 64-Bit Server VM (build 25.141-b15, mixed mode)```- Set environmentEdit .bash_profile file```sh
+$ vim ~/.bash_profile
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Homeexport PATH=$JAVA_HOME/bin:$PATH```## Scala```sh$ brew install scala```
+Scala 2.12.2 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_141)## SBT```sh$ brew install sbt
+
+Downloading https://github.com/sbt/sbt/releases/download/v0.13.15/sbt-0.13.15.tgz
+
+/usr/local/Cellar/sbt/0.13.15: 378 files, 63.3MB```Operations in project:```sh$ sbt 
+$ clean
+$ compile$ test$ testOnly partFileName*$ run
+$ publish```## Git```sh$ brew install git
+
+Downloading https://homebrew.bintray.com/bottles/git-2.13.3.sierra.bottle.1.tar.gz
+
+/usr/local/Cellar/git/2.13.3: 1,472 files, 33.2MB```## Intellij
+[Download](https://www.jetbrains.com/idea/)Don't suggest develper to use Scala-Eclipse. ## Mysql[MySQL Community Server 5.7.19](https://dev.mysql.com/downloads/mysql/)Add /usr/local/mysql/bin to your PATH environment variable[MySQL Workbench 6.3.9](https://dev.mysql.com/downloads/workbench/)## How to delete all ".DS_Store"```sh$ find . -name ".DS_Store" -exec rm {} \;```
